@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+		<menuitem 
+		            id="menu_reports"
+		            string="Reports"
+		            name="Reports"
+		            groups="base.group_user"
+		            sequence="3"/>
+
+        <record model="ir.ui.view" id="gstr_return_form_view">
+            <field name="name">leave.report.form</field>
+            <field name="model">leave.report</field>
+            <field name="arch" type="xml">
+                
+                <form string="Product Licence Form">
+                <header>
+                        <button name="get_data" type="object" string="Export Excel" class="oe_highlight"/>
+                </header>
+               <group>
+               	<div class="oe_title">
+					<h1>
+						<field name="name" string="GST" />
+					</h1>
+				</div>
+               </group>
+                    <group>
+                        <group>
+                            <field name="company_id" />
+                            
+                        </group>
+                        <group>
+                            <field name="start_date" />
+                            <field name="end_date" />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="gstr_return_tree_view">
+            <field name="name">leave.report.tree</field>
+            <field name="model">leave.report</field>
+            <field name="arch" type="xml">
+                <tree string="Timesheet Reports">
+                    <field name="company_id" />
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="leave_list_action1">
+            <field name="name">Timesheet Reports</field>
+            <field name="res_model">leave.report</field>
+            <field name="view_type">form</field>
+            <field name="view_form">form,tree</field>
+        </record>
+        
+		<menuitem   id="leave_dashboard_view"
+                    name="Leave Report"
+                    parent="menu_reports"
+                   />
+                    
+        <menuitem   id="report_leave_menu_view"
+                    name="Leave Report"
+                    parent="leave_dashboard_view"
+                    action="leave_list_action1"
+                    sequence="1" />
+        
+    </data>
+</openerp>
