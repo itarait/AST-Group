@@ -63,17 +63,6 @@
             </field>
         </record>
         
-<!--         <record id="view_project_project_filter_internal" model="ir.ui.view">-->
-<!--            <field name="name">view.project.project.filter.internal</field>-->
-<!--            <field name="model">project.project</field>-->
-<!--            <field name="inherit_id" ref="project.view_project_project_filter"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <xpath expr="/search/field[@name='partner_id']" position="after">-->
-<!--                    <field name="state" string="State"/>-->
-<!--                </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
-        
 
        <record id="project.view_project_project_filter" model="ir.ui.view">
             <field name="name">project.project.select</field>
@@ -95,6 +84,20 @@
                         <filter string="State" name="state" context="{'group_by':'state'}"/>
                     </group>
                 </search>
+            </field>
+        </record>
+
+        <record id="view_crm_lead_internal" model="ir.ui.view">
+            <field name="name">view.crm.lead.internal</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_form_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group/group[3]/field[1]" position="replace">
+                    <field name="team_id"/>
+                </xpath>
+                <xpath expr="/form/sheet/group/group[3]/field[2]" position="replace">
+                    <field name="user_id"/>
+                </xpath>
             </field>
         </record>
         

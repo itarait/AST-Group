@@ -40,3 +40,24 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     due_date = fields.Date(related='order_line.due_date',string='Due Date')
+    
+    
+class Lead(models.Model):
+    _inherit = "crm.lead"
+    
+        
+    @api.onchange('team_id')
+    def onchange_team_id(self):
+        vals = {}
+        user = []
+        if self.team_id:
+            sec = self.env['crm.team'].browse(self.team_id.id)
+            for sec_line in sec.member_ids:
+                user.append(sec_line.id)
+        domain = [('id','=', user)]
+        vals = {'domain': {'user_id' : domain}, 'value' : {'user_id' : False}}
+        return vals
+    
+    
+    
+    
